@@ -5,7 +5,7 @@ from . import ui
 bl_info = {
     "name": "Ultimate SGI Sprite Studio",
     "author": "Tutorisreal",
-    "version": (1, 0),
+    "version": (1, 1),
     "blender": (2, 93, 0),
     "location": "Top Bar > Render > SGI Sprite Studio",
     "description": "Professional SGI-style pre-rendering with Sheet Joining and Animation.",
@@ -13,13 +13,10 @@ bl_info = {
 }
 
 def register():
-    # Register the logic first
     operators.register()
-    # Then register the UI menu
     ui.register()
 
 def unregister():
-    # Unregister in reverse order
     ui.unregister()
     operators.unregister()
 

@@ -8,7 +8,7 @@ def setup_sgi_render(scene, pixel_mode=False):
     scene.render.image_settings.file_format = 'PNG'
     scene.render.image_settings.color_mode = 'RGBA'
     
-    # Ensure Cycles is used for Shadow Catcher to work
+    # Cycles is required for the Shadow Catcher in 2.93
     scene.render.engine = 'CYCLES'
     
     if pixel_mode:
@@ -32,13 +32,11 @@ class RENDER_OT_sgi_setup(bpy.types.Operator):
 
     def execute(self, context):
         setup_sgi_render(context.scene)
-        
-        # Create Shadow Catcher floor
         bpy.ops.mesh.primitive_plane_add(size=25)
         plane = bpy.context.active_object
         plane.name = "SGI_Shadow_Floor"
         
-        # FIX FOR BLENDER 2.93: Access cycles settings specifically
+        # API FIX: Accessing cycles settings for shadow catcher
         plane.cycles.is_shadow_catcher = True
         
         self.report({'INFO'}, "SGI Studio Ready")

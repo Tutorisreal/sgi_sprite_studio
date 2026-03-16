@@ -43,7 +43,7 @@ class RENDER_OT_sgi_setup(bpy.types.Operator):
         return {'FINISHED'}
 
 class RENDER_OT_sgi_action(bpy.types.Operator):
-    """Handles the rendering of still images and 8-dir animations."""
+    """Handles the rendering of still images and animations."""
     bl_idname = "render.sgi_action"
     bl_label = "SGI Render"
     mode: bpy.props.StringProperty()
@@ -65,12 +65,21 @@ class RENDER_OT_sgi_action(bpy.types.Operator):
         if self.mode == "STILL":
             scene.render.filepath = os.path.join(desktop, f"{obj.name}_render.png")
             bpy.ops.render.render(write_still=True)
+            
+        elif self.mode == "SINGLE_ANIM":
+            # Native Blender animation render for the current angle
+            anim_dir = os.path.join(desktop, "Single_Animation", "")
+            if not os.path.exists(anim_dir): os.makedirs(anim_dir)
+            scene.render.filepath = anim_dir
+            bpy.ops.render.render(animation=True)
+            
         elif self.mode == "BATCH":
             for i in range(8):
                 obj.rotation_euler[2] = math.radians(i * 45)
                 scene.render.filepath = os.path.join(desktop, f"angle_{i}.png")
                 bpy.ops.render.render(write_still=True)
-        elif self.mode == "ANIM":
+                
+        elif self.mode == "ANIM_8DIR":
             for d in range(8):
                 obj.rotation_euler[2] = math.radians(d * 45)
                 dir_path = os.path.join(desktop, f"Dir_{d}")

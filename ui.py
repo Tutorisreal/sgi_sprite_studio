@@ -1,7 +1,7 @@
 import bpy
 
 class RENDER_MT_sgi_ultimate_menu(bpy.types.Menu):
-    """The menu that appears in the Top Bar > Render."""
+    """v2.0 Top Bar Menu Interface."""
     bl_label = "SGI Sprite Studio"
     bl_idname = "RENDER_MT_sgi_ultimate_menu"
 

@@ -8,7 +8,7 @@ def setup_sgi_render(scene, pixel_mode=False):
     scene.render.image_settings.file_format = 'PNG'
     scene.render.image_settings.color_mode = 'RGBA'
     
-    # Cycles is required for the Shadow Catcher in 2.93
+    # Cycles is required for the Shadow Catcher in Blender 2.93
     scene.render.engine = 'CYCLES'
     
     if pixel_mode:
@@ -36,14 +36,14 @@ class RENDER_OT_sgi_setup(bpy.types.Operator):
         plane = bpy.context.active_object
         plane.name = "SGI_Shadow_Floor"
         
-        # API FIX: Accessing cycles settings for shadow catcher in 2.93
+        # Fixed for 2.93 Cycles API
         plane.cycles.is_shadow_catcher = True
         
-        self.report({'INFO'}, "SGI Studio Ready")
+        self.report({'INFO'}, "SGI Studio v2.0 Ready")
         return {'FINISHED'}
 
 class RENDER_OT_sgi_action(bpy.types.Operator):
-    """Handles the rendering of still images and animations."""
+    """Handles all v2.0 rendering modes."""
     bl_idname = "render.sgi_action"
     bl_label = "SGI Render"
     mode: bpy.props.StringProperty()
@@ -67,8 +67,7 @@ class RENDER_OT_sgi_action(bpy.types.Operator):
             bpy.ops.render.render(write_still=True)
             
         elif self.mode == "SINGLE_ANIM":
-            # Native Blender animation render for the current angle
-            anim_dir = os.path.join(desktop, "Single_Animation", "")
+            anim_dir = os.path.join(desktop, "Animation", "")
             if not os.path.exists(anim_dir): os.makedirs(anim_dir)
             scene.render.filepath = anim_dir
             bpy.ops.render.render(animation=True)
@@ -90,7 +89,7 @@ class RENDER_OT_sgi_action(bpy.types.Operator):
                     bpy.ops.render.render(write_still=True)
 
         obj.rotation_euler[2] = orig_rot
-        self.report({'INFO'}, "Renders Saved to Desktop")
+        self.report({'INFO'}, f"v2.0 Renders saved to {desktop}")
         return {'FINISHED'}
 
 def register():

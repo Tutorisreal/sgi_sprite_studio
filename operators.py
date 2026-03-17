@@ -36,7 +36,7 @@ class RENDER_OT_sgi_setup(bpy.types.Operator):
         plane = bpy.context.active_object
         plane.name = "SGI_Shadow_Floor"
         
-        # API FIX: Accessing cycles settings for shadow catcher
+        # API FIX: Accessing cycles settings for shadow catcher in 2.93
         plane.cycles.is_shadow_catcher = True
         
         self.report({'INFO'}, "SGI Studio Ready")

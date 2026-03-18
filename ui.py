@@ -7,41 +7,39 @@ class RENDER_MT_sgi_ultimate_menu(bpy.types.Menu):
 
     def draw(self, context):
         layout = self.layout
-        layout.operator("render.sgi_setup", icon='WORLD_DATA', text="Initialize Studio")
+        layout.operator("render.sgi_setup", icon='WORLD_DATA', text="1. Initialize Studio")
         layout.separator()
         
-        # RETRO / SNES SECTION
+        # SNES / PIXEL SECTION
         box = layout.box()
-        box.label(text="Retro / Handheld", icon='STRANDS')
+        box.label(text="Retro (32px / 64px)", icon='STRANDS')
         
-        # 32x32 SNES
         row = box.row(align=True)
-        op = row.operator("render.sgi_action", text="32px SNES Still")
+        op = row.operator("render.sgi_action", text="SNES Still (32px)")
         op.mode = "STILL"; op.res = 32
-        op = row.operator("render.sgi_action", text="32px SNES 8-Dir")
+        op = row.operator("render.sgi_action", text="SNES 8-Dir")
         op.mode = "ANIM_8DIR"; op.res = 32
 
-        # 64x64 Classic
         row = box.row(align=True)
-        op = row.operator("render.sgi_action", text="64px Still")
+        op = row.operator("render.sgi_action", text="Pixel Still (64px)")
         op.mode = "STILL"; op.res = 64
-        op = row.operator("render.sgi_action", text="64px 8-Dir")
+        op = row.operator("render.sgi_action", text="Pixel 8-Dir")
         op.mode = "ANIM_8DIR"; op.res = 64
 
         layout.separator()
 
-        # HIGH-RES SECTION
+        # HD SECTION
         box = layout.box()
         box.label(text="High-Definition SGI", icon='RENDER_STILL')
         
         row = box.row(align=True)
-        op = row.operator("render.sgi_action", text="256px HD")
+        op = row.operator("render.sgi_action", text="256px HD Still")
         op.mode = "STILL"; op.res = 256
         op = row.operator("render.sgi_action", text="256px 8-Dir")
         op.mode = "ANIM_8DIR"; op.res = 256
 
         row = box.row(align=True)
-        op = row.operator("render.sgi_action", text="512px Ultra")
+        op = row.operator("render.sgi_action", text="512px Ultra Still")
         op.mode = "STILL"; op.res = 512
         op = row.operator("render.sgi_action", text="512px 8-Dir")
         op.mode = "ANIM_8DIR"; op.res = 512

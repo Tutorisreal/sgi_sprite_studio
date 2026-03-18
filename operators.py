@@ -27,7 +27,7 @@ class RENDER_OT_sgi_setup(bpy.types.Operator):
             plane.name = "SGI_Shadow_Floor"
             plane.cycles.is_shadow_catcher = True
         
-        self.report({'INFO'}, "SGI Pro Studio Ready (Manual Camera)")
+        self.report({'INFO'}, "SGI Pro Studio Ready")
         return {'FINISHED'}
 
 class RENDER_OT_sgi_action(bpy.types.Operator):
@@ -39,13 +39,14 @@ class RENDER_OT_sgi_action(bpy.types.Operator):
 
     def execute(self, context):
         scene = context.scene
-        targets = [obj for obj in context.selected_objects if obj.type == 'MESH' and obj.name != "SGI_Shadow_Floor"]
+        # Broadened filter: Includes anything selected except the shadow floor
+        targets = [obj for obj in context.selected_objects if obj.name != "SGI_Shadow_Floor"]
         
         if not scene.camera:
-            self.report({'ERROR'}, "No active camera! Add one manually.")
+            self.report({'ERROR'}, "No active camera! Please add one manually.")
             return {'CANCELLED'}
         if not targets:
-            self.report({'ERROR'}, "Select at least one mesh object!")
+            self.report({'ERROR'}, "Nothing selected! Select your character in the viewport.")
             return {'CANCELLED'}
 
         setup_sgi_render(scene, res=self.res)

@@ -3,12 +3,12 @@ from . import operators
 from . import ui
 
 bl_info = {
-    "name": "Ultimate SGI Sprite Studio PRO",
+    "name": "Ultimate SGI Sprite Studio MAX PRO",
     "author": "Tutorisreal",
-    "version": (3, 1),
+    "version": (4, 0),
     "blender": (2, 93, 0),
-    "location": "Top Bar > Render > SGI Sprite Studio",
-    "description": "Pro SGI pre-rendering. Improved selection logic for SNES and HD modes.",
+    "location": "Top Bar > Render > SGI MAX PRO",
+    "description": "Enterprise-grade SGI rendering. 16-Dir support, Auto-Lighting, and Smart Selection.",
     "category": "Render",
 }
 
